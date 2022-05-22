@@ -1,31 +1,14 @@
 import React, { Fragment } from 'react';
 import './App.css';
-import { PlayerCounter } from './features/players/components/PlayerCounter'
-import { PlayerList } from './features/players/components/PlayerList'
-import { PlayerForm } from './features/players/components/PlayerForm'
-
-const defaultPlayers = [
-  {
-    id: 1,
-    first_name: "Armando",
-    last_name: "Ortega",
-  },
-  {
-    id: 2,
-    first_name: "Alexis",
-    last_name: "Ortega",
-  },
-  {
-    id: 3,
-    first_name: "Alec",
-    last_name: "Ortega",
-  },
-];
+import { PlayerCounter } from './features/players/components/PlayerCounter';
+import { PlayerList } from './features/players/components/PlayerList';
+import { PlayerForm } from './features/players/components/PlayerForm';
+import axios from 'axios';
 
 function App() {
   const [firstName, setFirstName] = React.useState('');
   const [lastName, setLastName] = React.useState('');
-  const [players, setPlayers] = React.useState(defaultPlayers);
+  const [players, setPlayers] = React.useState([]);
   const addPlayer = () => {
     const player = {
       id: players.length + 1,
@@ -38,6 +21,21 @@ function App() {
     setFirstName('');
     setLastName('');
   }
+
+  React.useEffect(() => {
+    getPlayers();
+  }, []);
+
+  const getPlayers = async () => {
+    try {
+      const { data } = await axios.get("http://localhost:3000/players");
+      setPlayers(data.data);
+    } catch (error) {
+      console.log(error);
+      setPlayers([]);
+    }
+  };
+
   return (
     <React.Fragment>
       <PlayerCounter counter={players.length} />
