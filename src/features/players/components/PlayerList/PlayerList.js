@@ -1,6 +1,6 @@
 import React from "react";
 import { PlayerListItem } from "../PlayerListItem";
-import "./PlayerList.css"
+import "./PlayerList.css";
 
 export function PlayerList(props) {
   return (
