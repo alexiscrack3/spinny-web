@@ -1,4 +1,4 @@
-import "./PlayerListItem.css"
+import "./PlayerListItem.css";
 
 export function PlayerListItem(props) {
     return (

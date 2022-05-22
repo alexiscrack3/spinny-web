@@ -1,5 +1,5 @@
-import React from "react"
-import "./PlayerForm.css"
+import React from "react";
+import "./PlayerForm.css";
 
 export function PlayerForm(props) {
   const onFirstNameChange = (event) => {
