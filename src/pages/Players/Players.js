@@ -1,9 +1,9 @@
 import React from 'react';
 import "./Players.css";
 
-import { PlayerCounter } from '../../features/players/components/PlayerCounter';
-import { PlayerList } from '../../features/players/components/PlayerList';
-import { PlayerForm } from '../../features/players/components/PlayerForm';
+import { PlayerCounter } from '../../components/players/PlayerCounter';
+import { PlayerList } from '../../components/players/PlayerList';
+import { PlayerForm } from '../../components/players/PlayerForm';
 
 import axios from 'axios';
 
