@@ -1,5 +1,5 @@
 import { Routes as Switch, Route } from "react-router-dom";
-import { About, Home, Players, NotFound } from "../../pages";
+import { About, Home, Players, NewPlayer, NotFound } from "../../pages";
 
 const ROUTE_LIST = [
   {
@@ -17,6 +17,10 @@ const ROUTE_LIST = [
   {
     path: "/players",
     element: Players,
+  },
+  {
+    path: "/players/new",
+    element: NewPlayer,
   },
 ];
 
