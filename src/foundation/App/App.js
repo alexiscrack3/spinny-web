@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home } from "./containers/Home";
-import { About } from "./containers/About";
-import { Players } from "./containers/Players";
-import { NotFound } from "./containers/NotFound";
+import { Home } from "../../containers/Home";
+import { About } from "../../containers/About";
+import { Players } from "../../containers/Players";
+import { NotFound } from "../../containers/NotFound";
 import "./App.css";
 
 export function App() {
