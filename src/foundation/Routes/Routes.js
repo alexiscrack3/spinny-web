@@ -23,8 +23,8 @@ const ROUTE_LIST = [
 export default function Routes() {
   return (
     <Switch>
-      {ROUTE_LIST.map((route) => (
-        <Route path={route.path} element={<route.element />} />
+      {ROUTE_LIST.map((route, index) => (
+        <Route key={index} path={route.path} element={<route.element />} />
       ))}
       <Route path="*" element={<NotFound />} />
     </Switch>
