@@ -7,6 +7,10 @@ const ROUTE_LIST = [
     element: Home,
   },
   {
+    path: "/home",
+    element: Home,
+  },
+  {
     path: "/about",
     element: About,
   },
