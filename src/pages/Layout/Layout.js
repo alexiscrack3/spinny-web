@@ -1,5 +1,15 @@
-import './Layout.css';
+import Container from "react-bootstrap/Container";
+import { Header } from "./Header";
 
-export function Layout({children }) {
-  return <div>{children}</div>;
+import "./Layout.css";
+
+export function Layout({ children }) {
+  return (
+    <div>
+      <Container>
+        <Header />
+        {children}
+      </Container>
+    </div>
+  );
 }
