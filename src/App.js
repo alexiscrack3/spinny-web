@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Players } from "./containers/Players";
 import { Home } from "./containers/Home";
+import { About } from "./containers/About";
+import { Players } from "./containers/Players";
 import "./App.css";
 
 export function App() {
@@ -8,6 +9,7 @@ export function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
         <Route path="/players" element={<Players />} />
       </Routes>
     </BrowserRouter>
