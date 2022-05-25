@@ -1,8 +1,10 @@
 import React from "react";
 import { Container, Row, Col, Button, Table } from "react-bootstrap";
+import { PlayersContext } from "../../../hooks/Players/PlayersProvider";
 import "./PlayerList.css";
 
-export function PlayerList(props) {
+export function PlayerList() {
+  const { players } = React.useContext(PlayersContext);
   return (
     <React.Fragment>
       <Container>
@@ -27,7 +29,7 @@ export function PlayerList(props) {
             </tr>
           </thead>
           <tbody>
-            {props.players.map((player, index) => (
+            {players.map((player, index) => (
               <tr key={index}>
                 <td>{player.id}</td>
                 <td>{player.email}</td>

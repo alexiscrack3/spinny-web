@@ -1,7 +1,10 @@
-import "./PlayerCounter.css"
+import React from "react";
+
+import "./PlayerCounter.css";
+
+import { PlayersContext } from "../../../hooks/Players/PlayersProvider";
 
 export function PlayerCounter({ counter }) {
-    return (
-        <p>Number of players: {counter}</p>
-    )
+  const { players } = React.useContext(PlayersContext);
+  return <p>Number of players: {players.length}</p>;
 }
