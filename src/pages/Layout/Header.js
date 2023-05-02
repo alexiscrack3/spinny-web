@@ -17,6 +17,10 @@ export function Header() {
               <NavDropdown.Item href="/admin/players">Players</NavDropdown.Item>
             </NavDropdown>
           </Nav>
+          <Nav>
+            <Button variant="outline-primary" className="me-2" href="/users/sign_in">Log in</Button>
+            <Button variant="primary" href="/users/sign_up">Sign up</Button>
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
