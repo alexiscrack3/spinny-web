@@ -12,8 +12,13 @@ const PlayersProvider = (props) => {
 
   const getPlayers = async () => {
     try {
-      console.log(`ENV = ${process.env.BASE_URL}`);
-      const { data } = await axios.get(`${process.env.BASE_URL}/players`);
+      console.log(`ENV = ${process.env.REACT_APP_BASE_URL}`);
+      const config = {
+        headers: {
+          Authorization: "Bearer token"
+        }
+      }
+      const { data } = await axios.get(`${process.env.REACT_APP_BASE_URL}/players`, config);
       setPlayers(data.data);
     } catch (error) {
       console.log(error);
