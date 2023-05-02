@@ -1,10 +1,13 @@
 import React from "react";
-import { Container, Row, Col, Button, Table } from "react-bootstrap";
+import { Container, Row, Col, Button, Stack, Table } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { PlayersContext } from "../../../hooks/Players/PlayersProvider";
 import "./PlayerList.css";
 
 export function PlayerList() {
   const { players } = React.useContext(PlayersContext);
+  const navigateToPlayer = useNavigate();
+
   return (
     <React.Fragment>
       <Container>
@@ -35,7 +38,12 @@ export function PlayerList() {
                 <td>{player.email}</td>
                 <td>{player.first_name}</td>
                 <td>{player.last_name}</td>
-                <td>TODO</td>
+                <td>
+                <Stack direction="horizontal" gap={2}>
+                  <Button variant="secondary" onClick={() => navigateToPlayer(`/admin/players/${player.id}`)}>Update</Button>
+                  <Button variant="danger">Delete</Button>
+                </Stack>
+                </td>
               </tr>
             ))}
           </tbody>
