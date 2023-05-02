@@ -13,7 +13,7 @@ export function PlayerList() {
             <h1>Players</h1>
           </Col>
           <Col>
-            <Button variant="primary" className="float-end" href="/players/new">Add Player</Button>
+            <Button variant="primary" className="float-end" href="/admin/players/new">Add Player</Button>
           </Col>
         </Row>
       </Container>

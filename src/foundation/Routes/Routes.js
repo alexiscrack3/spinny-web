@@ -15,11 +15,11 @@ const ROUTE_LIST = [
     element: About,
   },
   {
-    path: "/players",
+    path: "/admin/players",
     element: Players,
   },
   {
-    path: "/players/new",
+    path: "/admin/players/new",
     element: NewPlayer,
   },
 ];

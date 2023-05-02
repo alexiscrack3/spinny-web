@@ -1,12 +1,16 @@
 import { BrowserRouter } from "react-router-dom";
 import { Routes } from "../../foundation";
+import Container from 'react-bootstrap/Container';
+import { Layout } from '../../pages/Layout';
 import "./App.css";
 
 const App = () =>{
   return (
-    <BrowserRouter>
-      <Routes />
-    </BrowserRouter>
+    <Layout>
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+    </Layout>
   );
 }
 
