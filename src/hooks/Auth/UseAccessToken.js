@@ -11,11 +11,17 @@ const useAccessToken = () => {
     setAccessToken(accessToken);
   };
 
+  const clear = () => {
+    localStorage.removeItem("access_token");
+    setAccessToken(undefined);
+  };
+
   const [accessToken, setAccessToken] = useState(get());
 
   return {
     get,
     set,
+    clear,
   };
 };
 
