@@ -1,13 +1,18 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Button from "react-bootstrap/Button";
+import { Container, Nav, Navbar, NavDropdown, Button } from "react-bootstrap";
+import { useState, useEffect } from "react";
+
 import "./Header.css";
 
+import { PlayersService } from "../../services";
 import { useAccessToken } from "../../hooks/Auth";
 
 export function Header() {
+  const [email, setEmail] = useState();
+  useEffect(async () => {
+    const user = await PlayersService.me();
+    setEmail(user.email);
+  }, []);
+
   const tokenManager = useAccessToken();
 
   const signOut = () => {
@@ -34,9 +39,16 @@ export function Header() {
           </Nav>
           {tokenManager.get() ? (
             <Nav>
-              <Button variant="outline-primary" onClick={() => signOut()}>
-                Sign out
-              </Button>
+              <NavDropdown title={email} id="basic-nav-dropdown">
+                <NavDropdown.Item href="#action/3.1">
+                  Your profile
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">Settings</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={() => signOut()}>
+                  Sign out
+                </NavDropdown.Item>
+              </NavDropdown>
             </Nav>
           ) : (
             <Nav>
