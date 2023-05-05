@@ -7,10 +7,15 @@ import { PlayersService } from "../../services";
 import { useAccessToken } from "../../hooks/Auth";
 
 export function Header() {
+  const [playerId, setPlayerId] = useState();
   const [email, setEmail] = useState();
-  useEffect(async () => {
-    const user = await PlayersService.me();
-    setEmail(user.email);
+
+  useEffect(() => {
+    (async () => {
+      const user = await PlayersService.me();
+      setPlayerId(user.id);
+      setEmail(user.email);
+    })();
   }, []);
 
   const tokenManager = useAccessToken();
@@ -40,7 +45,7 @@ export function Header() {
           {tokenManager.get() ? (
             <Nav>
               <NavDropdown title={email} id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">
+                <NavDropdown.Item href={`/players/${playerId}`}>
                   Your profile
                 </NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Settings</NavDropdown.Item>

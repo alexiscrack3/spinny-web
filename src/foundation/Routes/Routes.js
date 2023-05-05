@@ -6,6 +6,7 @@ import {
   Home,
   Players,
   NewPlayer,
+  PlayerDetails,
   UpdatePlayer,
   NotFound,
 } from "../../pages";
@@ -41,8 +42,12 @@ const ROUTE_LIST = [
   },
   {
     path: "/admin/players/:id",
-    element: UpdatePlayer
-  }
+    element: UpdatePlayer,
+  },
+  {
+    path: "/players/:id",
+    element: PlayerDetails,
+  },
 ];
 
 export default function Routes() {
