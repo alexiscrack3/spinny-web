@@ -5,7 +5,7 @@ import { PlayersContext } from '../../../hooks/Players/PlayersProvider';
 import './PlayerList.css';
 
 function PlayerList() {
-  const { players } = useContext(PlayersContext);
+  const players = useContext(PlayersContext);
   const navigateToPlayer = useNavigate();
 
   return (

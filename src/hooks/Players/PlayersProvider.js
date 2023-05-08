@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import { PlayersService } from '../../services';
 
-const PlayersContext = React.createContext();
+const PlayersContext = createContext();
 
 function PlayersProvider({ children }) {
   const [players, setPlayers] = useState([]);
