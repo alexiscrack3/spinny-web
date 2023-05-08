@@ -1,12 +1,13 @@
-import { Container, Nav, Navbar, NavDropdown, Button } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { Container, Nav, Navbar, NavDropdown, Button } from 'react-bootstrap';
 
-import "./Header.css";
+import React, { useState, useEffect } from 'react';
 
-import { PlayersService } from "../../services";
-import { useAccessToken } from "../../hooks/Auth";
+import './Header.css';
 
-export function Header() {
+import { PlayersService } from '../../services';
+import useAccessToken from '../../hooks/Auth';
+
+function Header() {
   const [playerId, setPlayerId] = useState();
   const [email, setEmail] = useState();
 
@@ -32,14 +33,12 @@ export function Header() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/about">About</Nav.Link>
-            {tokenManager.get() ? (
+            {tokenManager.get() && (
               <NavDropdown title="Admin" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/admin/players">
                   Players
                 </NavDropdown.Item>
               </NavDropdown>
-            ) : (
-              <></>
             )}
           </Nav>
           {tokenManager.get() ? (
@@ -74,3 +73,5 @@ export function Header() {
     </Navbar>
   );
 }
+
+export default Header;

@@ -1,1 +1,3 @@
-export { PlayerCounter } from "./PlayerCounter"
+import PlayerCounter from './PlayerCounter';
+
+export default PlayerCounter;

@@ -1,1 +1,3 @@
-export { useAccessToken } from "./UseAccessToken";
+import useAccessToken from './UseAccessToken';
+
+export default useAccessToken;

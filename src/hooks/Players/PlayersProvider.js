@@ -1,34 +1,30 @@
-import React from "react";
-import { PlayersService } from "../../services";
+import React, { useState, useEffect } from 'react';
+import { PlayersService } from '../../services';
 
 const PlayersContext = React.createContext();
 
-const PlayersProvider = (props) => {
-  const [players, setPlayers] = React.useState([]);
-
-  React.useEffect(() => {
-    getPlayers();
-  }, []);
+function PlayersProvider({ children }) {
+  const [players, setPlayers] = useState([]);
 
   const getPlayers = async () => {
     try {
-      const players = await PlayersService.getPlayers()
-      setPlayers(players);
+      const result = await PlayersService.getPlayers();
+      setPlayers(result);
     } catch (error) {
       console.log(error);
       setPlayers([]);
     }
   };
 
+  useEffect(() => {
+    getPlayers();
+  }, []);
+
   return (
-    <PlayersContext.Provider
-      value={{
-        players,
-      }}
-    >
-      {props.children}
+    <PlayersContext.Provider value={players}>
+      {children}
     </PlayersContext.Provider>
   );
-};
+}
 
 export { PlayersContext, PlayersProvider };

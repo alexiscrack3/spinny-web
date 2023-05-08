@@ -1,28 +1,27 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-const useAccessToken = () => {
-  const get = () => {
-    const accessToken = localStorage.getItem("access_token");
-    return accessToken;
-  };
+function useAccessToken() {
+  const [accessToken, setAccessToken] = useState(
+    localStorage.getItem('access_token')
+  );
 
-  const set = (accessToken) => {
-    localStorage.setItem("access_token", accessToken);
-    setAccessToken(accessToken);
+  const get = () => accessToken;
+
+  const set = (token) => {
+    localStorage.setItem('access_token', token);
+    setAccessToken(token);
   };
 
   const clear = () => {
-    localStorage.removeItem("access_token");
+    localStorage.removeItem('access_token');
     setAccessToken(undefined);
   };
-
-  const [accessToken, setAccessToken] = useState(get());
 
   return {
     get,
     set,
     clear,
   };
-};
+}
 
-export { useAccessToken };
+export default useAccessToken;

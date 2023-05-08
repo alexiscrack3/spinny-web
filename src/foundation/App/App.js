@@ -1,9 +1,10 @@
-import { BrowserRouter } from "react-router-dom";
-import { Routes } from "../../foundation";
-import { Layout } from "../../pages/Layout";
-import "./App.css";
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import Routes from '../Routes';
+import Layout from '../../pages/Layout';
+import './App.css';
 
-const App = () => {
+function App() {
   return (
     <Layout>
       <BrowserRouter>
@@ -11,6 +12,6 @@ const App = () => {
       </BrowserRouter>
     </Layout>
   );
-};
+}
 
 export default App;

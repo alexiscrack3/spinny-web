@@ -1,19 +1,17 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Container } from "react-bootstrap";
-import { PlayersService } from "../../services/PlayersService";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
+import PlayersService from '../../services/PlayersService';
 
-import "./PlayerDetails";
-
-const PlayerDetails = () => {
+function PlayerDetails() {
   const { id } = useParams();
   const [player, setPlayer] = useState();
 
   useEffect(() => {
     (async () => {
       try {
-        const player = await PlayersService.getPlayerById(id);
-        setPlayer(player);
+        const result = await PlayersService.getPlayerById(id);
+        setPlayer(result);
       } catch (error) {
         setPlayer(null);
       }
@@ -27,6 +25,6 @@ const PlayerDetails = () => {
       <h1>{player && player.email}</h1>
     </Container>
   );
-};
+}
 
-export { PlayerDetails };
+export default PlayerDetails;

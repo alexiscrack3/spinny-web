@@ -1,4 +1,5 @@
-import { Routes as Switch, Route } from "react-router-dom";
+import React from 'react';
+import { Routes as Switch, Route } from 'react-router-dom';
 import {
   SignIn,
   SignUp,
@@ -9,43 +10,43 @@ import {
   PlayerDetails,
   UpdatePlayer,
   NotFound,
-} from "../../pages";
+} from '../../pages';
 
 const ROUTE_LIST = [
   {
-    path: "/",
+    path: '/',
     element: Home,
   },
   {
-    path: "/home",
+    path: '/home',
     element: Home,
   },
   {
-    path: "/users/sign_in",
+    path: '/users/sign_in',
     element: SignIn,
   },
   {
-    path: "/users/sign_up",
+    path: '/users/sign_up',
     element: SignUp,
   },
   {
-    path: "/about",
+    path: '/about',
     element: About,
   },
   {
-    path: "/admin/players",
+    path: '/admin/players',
     element: Players,
   },
   {
-    path: "/admin/players/new",
+    path: '/admin/players/new',
     element: NewPlayer,
   },
   {
-    path: "/admin/players/:id",
+    path: '/admin/players/:id',
     element: UpdatePlayer,
   },
   {
-    path: "/players/:id",
+    path: '/players/:id',
     element: PlayerDetails,
   },
 ];
@@ -53,8 +54,8 @@ const ROUTE_LIST = [
 export default function Routes() {
   return (
     <Switch>
-      {ROUTE_LIST.map((route, index) => (
-        <Route key={index} path={route.path} element={<route.element />} />
+      {ROUTE_LIST.map((route) => (
+        <Route key={route.path} path={route.path} element={<route.element />} />
       ))}
       <Route path="*" element={<NotFound />} />
     </Switch>

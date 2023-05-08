@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const LoginService = {
   signIn: async (email, password) => {
@@ -13,7 +13,7 @@ const LoginService = {
         `${process.env.REACT_APP_BASE_URL}/players/sign_in`,
         params
       );
-      const accessToken = headers.getAuthorization().split(" ").pop();
+      const accessToken = headers.getAuthorization().split(' ').pop();
       return accessToken;
     } catch (error) {
       console.log(error);
@@ -22,4 +22,4 @@ const LoginService = {
   },
 };
 
-export { LoginService };
+export default LoginService;

@@ -1,1 +1,3 @@
-export { PlayerListItem } from './PlayerListItem';
+import PlayerListItem from './PlayerListItem';
+
+export default PlayerListItem;

@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button, Col, Form, Row } from 'react-bootstrap';
 
-import { LoginService } from "../../services";
-import { useAccessToken } from "../../hooks/Auth";
+import { LoginService } from '../../services';
+import useAccessToken from '../../hooks/Auth';
 
-import "./SignIn.css";
+import './SignIn.css';
 
-export function SignIn() {
-  const [email, setEmail] = useState("alexis@gmail.com");
-  const [password, setPassword] = useState("123456");
+function SignIn() {
+  const [email, setEmail] = useState('alexis@gmail.com');
+  const [password, setPassword] = useState('123456');
   const [validated, setValidated] = useState(false);
-  const [signInButtonText, setSignInButtonText] = useState("Sign in");
+  const [signInButtonText, setSignInButtonText] = useState('Sign in');
   const navigateToPlayers = useNavigate();
   const tokenManager = useAccessToken();
 
@@ -21,13 +21,13 @@ export function SignIn() {
     e.stopPropagation();
 
     if (form.checkValidity()) {
-      setSignInButtonText("Signing in...");
+      setSignInButtonText('Signing in...');
       try {
         const accessToken = await LoginService.signIn(email, password);
         tokenManager.set(accessToken);
-        navigateToPlayers("/admin/players");
+        navigateToPlayers('/admin/players');
       } catch (error) {
-        setSignInButtonText("Sign in");
+        setSignInButtonText('Sign in');
       }
     }
     setValidated(true);
@@ -85,3 +85,5 @@ export function SignIn() {
     </Row>
   );
 }
+
+export default SignIn;

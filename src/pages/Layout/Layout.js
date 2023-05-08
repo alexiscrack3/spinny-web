@@ -1,16 +1,17 @@
-import Container from "react-bootstrap/Container";
-import { Header } from "./Header";
-import { Body } from "./Body";
+import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Header from './Header';
+import Body from './Body';
 
-import "./Layout.css";
+import './Layout.css';
 
-export function Layout({ children }) {
+function Layout({ children }) {
   return (
     <Container fluid className="App">
       <Header />
-      <Body>
-        {children}
-      </Body>
+      <Body>{children}</Body>
     </Container>
   );
 }
+
+export default Layout;

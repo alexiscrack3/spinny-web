@@ -1,9 +1,9 @@
-import React from "react";
-import Container from "react-bootstrap/Container";
-import { useParams } from "react-router-dom";
-import "./UpdatePlayer.css";
+import React from 'react';
+import Container from 'react-bootstrap/Container';
+import { useParams } from 'react-router-dom';
+import './UpdatePlayer.css';
 
-export function UpdatePlayer() {
+function UpdatePlayer() {
   const { id } = useParams();
 
   return (
@@ -12,3 +12,5 @@ export function UpdatePlayer() {
     </Container>
   );
 }
+
+export default UpdatePlayer;

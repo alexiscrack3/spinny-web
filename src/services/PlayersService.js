@@ -1,11 +1,11 @@
-import axios from "axios";
+import axios from 'axios';
 
 const PlayersService = {
   me: async () => {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
         },
       };
       const { data } = await axios.get(
@@ -22,7 +22,7 @@ const PlayersService = {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
         },
       };
       console.log(`ENV = ${process.env.REACT_APP_BASE_URL}`);
@@ -40,7 +40,7 @@ const PlayersService = {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
         },
       };
       const { data } = await axios.get(
@@ -55,4 +55,4 @@ const PlayersService = {
   },
 };
 
-export { PlayersService };
+export default PlayersService;

@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 
-import { PlayersProvider } from "../../hooks/Players/PlayersProvider";
-import { PlayerList } from "../../components/players/PlayerList";
-import { PlayerCounter } from "../../components/players/PlayerCounter";
+import { PlayersProvider } from '../../hooks/Players/PlayersProvider';
+import PlayerList from '../../components/players/PlayerList';
+import PlayerCounter from '../../components/players/PlayerCounter';
 
-import "./Players.css";
+import './Players.css';
 
-export function Players() {
+function Players() {
   return (
-    <React.Fragment>
-      <PlayersProvider>
-        <PlayerList />
-        <PlayerCounter />
-      </PlayersProvider>
-    </React.Fragment>
+    <PlayersProvider>
+      <PlayerList />
+      <PlayerCounter />
+    </PlayersProvider>
   );
 }
+
+export default Players;

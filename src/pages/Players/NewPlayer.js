@@ -1,11 +1,11 @@
-import React from "react";
-import Container from "react-bootstrap/Container";
-import { PlayerForm } from "../../components/players/PlayerForm";
-import "./NewPlayer.css";
+import React from 'react';
+import Container from 'react-bootstrap/Container';
+import PlayerForm from '../../components/players/PlayerForm';
+import './NewPlayer.css';
 
-export function NewPlayer({ players, setPlayers }) {
-  const [firstName, setFirstName] = React.useState("");
-  const [lastName, setLastName] = React.useState("");
+function NewPlayer({ players, setPlayers }) {
+  const [firstName, setFirstName] = React.useState('');
+  const [lastName, setLastName] = React.useState('');
   const addPlayer = () => {
     const player = {
       id: players.length + 1,
@@ -15,8 +15,8 @@ export function NewPlayer({ players, setPlayers }) {
     const allPlayers = [...players];
     allPlayers.push(player);
     setPlayers(allPlayers);
-    setFirstName("");
-    setLastName("");
+    setFirstName('');
+    setLastName('');
   };
 
   return (
@@ -31,3 +31,5 @@ export function NewPlayer({ players, setPlayers }) {
     </Container>
   );
 }
+
+export default NewPlayer;

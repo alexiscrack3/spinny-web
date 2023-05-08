@@ -1,4 +1,6 @@
-export { Players } from "./Players";
-export { NewPlayer } from "./NewPlayer";
-export { PlayerDetails } from "./PlayerDetails";
-export { UpdatePlayer } from "./UpdatePlayer";
+import Players from './Players';
+import NewPlayer from './NewPlayer';
+import PlayerDetails from './PlayerDetails';
+import UpdatePlayer from './UpdatePlayer';
+
+export { Players, NewPlayer, PlayerDetails, UpdatePlayer };

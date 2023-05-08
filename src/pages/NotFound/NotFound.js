@@ -1,7 +1,12 @@
-import "./NotFound.css";
+import React from 'react';
+import './NotFound.css';
 
-export function NotFound() {
-    return (
-        <div><p>NotFound page</p></div>
-    )
+function NotFound() {
+  return (
+    <div>
+      <p>NotFound page</p>
+    </div>
+  );
 }
+
+export default NotFound;

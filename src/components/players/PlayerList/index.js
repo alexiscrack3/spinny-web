@@ -1,1 +1,3 @@
-export { PlayerList } from './PlayerList';
+import PlayerList from './PlayerList';
+
+export default PlayerList;
