@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Container, Row, Col, Button, Stack, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { BsPlusCircleFill } from 'react-icons/bs';
 import { PlayersContext } from '../../../hooks/Players/PlayersProvider';
 import './PlayerList.css';
 
@@ -9,24 +10,22 @@ function PlayerList() {
   const navigateToPlayer = useNavigate();
 
   return (
-    <>
-      <Container>
-        <Row>
-          <Col>
-            <h1>Players</h1>
-          </Col>
-          <Col>
-            <Button
-              variant="primary"
-              className="float-end"
-              href="/admin/players/new"
-            >
-              Add Player
-            </Button>
-          </Col>
-        </Row>
-      </Container>
-      <Container>
+    <Container>
+      <Row>
+        <Col>
+          <h1>Players</h1>
+        </Col>
+        <Col>
+          <Button
+            variant="primary"
+            className="float-end"
+            href="/admin/players/new"
+          >
+            Add player <BsPlusCircleFill />
+          </Button>
+        </Col>
+      </Row>
+      <Row>
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -61,8 +60,8 @@ function PlayerList() {
             ))}
           </tbody>
         </Table>
-      </Container>
-    </>
+      </Row>
+    </Container>
   );
 }
 
