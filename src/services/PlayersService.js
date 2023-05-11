@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Logger from 'js-logger';
 
 const PlayersService = {
   me: async () => {
@@ -11,7 +12,7 @@ const PlayersService = {
       const { data } = await axios.get('/players/me', config);
       return data.data;
     } catch (error) {
-      console.log(error);
+      Logger.error(error);
       throw error;
     }
   },
@@ -25,7 +26,7 @@ const PlayersService = {
       const { data } = await axios.get(`/players`, config);
       return data.data;
     } catch (error) {
-      console.log(error);
+      Logger.error(error);
       throw error;
     }
   },
@@ -39,7 +40,7 @@ const PlayersService = {
       const { data } = await axios.get(`/players/${id}`, config);
       return data.data;
     } catch (error) {
-      console.log(error);
+      Logger.error(error);
       throw error;
     }
   },

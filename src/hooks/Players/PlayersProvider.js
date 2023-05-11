@@ -1,4 +1,5 @@
 import React, { useState, useEffect, createContext } from 'react';
+import Logger from 'js-logger';
 import { PlayersService } from '../../services';
 
 const PlayersContext = createContext();
@@ -11,7 +12,7 @@ function PlayersProvider({ children }) {
       const result = await PlayersService.getPlayers();
       setPlayers(result);
     } catch (error) {
-      console.log(error);
+      Logger.error(error);
       setPlayers([]);
     }
   };

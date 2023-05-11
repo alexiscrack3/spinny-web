@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import { App } from './foundation';
+import { App, InitializeLogger } from './foundation';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 
 axios.defaults.baseURL =
   process.env.REACT_APP_BASE_URL || 'http://localhost:3000';
+
+InitializeLogger();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Logger from 'js-logger';
 
 const LoginService = {
   signIn: async (email, password) => {
@@ -13,7 +14,7 @@ const LoginService = {
       const accessToken = headers.getAuthorization().split(' ').pop();
       return accessToken;
     } catch (error) {
-      console.log(error);
+      Logger.error(error);
       throw error;
     }
   },
