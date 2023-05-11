@@ -9,10 +9,7 @@ const LoginService = {
           password,
         },
       };
-      const { headers } = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/players/sign_in`,
-        params
-      );
+      const { headers } = await axios.post('/players/sign_in', params);
       const accessToken = headers.getAuthorization().split(' ').pop();
       return accessToken;
     } catch (error) {

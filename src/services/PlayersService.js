@@ -8,10 +8,7 @@ const PlayersService = {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`,
         },
       };
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/players/me`,
-        config
-      );
+      const { data } = await axios.get('/players/me', config);
       return data.data;
     } catch (error) {
       console.log(error);
@@ -25,11 +22,7 @@ const PlayersService = {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`,
         },
       };
-      console.log(`ENV = ${process.env.REACT_APP_BASE_URL}`);
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/players`,
-        config
-      );
+      const { data } = await axios.get(`/players`, config);
       return data.data;
     } catch (error) {
       console.log(error);
@@ -43,10 +36,7 @@ const PlayersService = {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`,
         },
       };
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/players/${id}`,
-        config
-      );
+      const { data } = await axios.get(`/players/${id}`, config);
       return data.data;
     } catch (error) {
       console.log(error);
