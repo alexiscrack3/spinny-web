@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 
 import { LoginService } from '../../services';
 import useAccessToken from '../../hooks/Auth';
@@ -34,55 +34,51 @@ function SignIn() {
   };
 
   return (
-    <Row>
-      <Col>
-        <Form
-          className="Form-SignIn"
-          validated={validated}
-          onSubmit={handleSubmit}
-          noValidate
-        >
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Email"
-              defaultValue="alexis@gmail.com"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <Form.Control.Feedback type="invalid">
-              The email is required.
-            </Form.Control.Feedback>
-          </Form.Group>
+    <Form
+      className="Form-SignIn"
+      validated={validated}
+      onSubmit={handleSubmit}
+      noValidate
+    >
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Email</Form.Label>
+        <Form.Control
+          type="email"
+          placeholder="Email"
+          defaultValue="alexis@gmail.com"
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <Form.Control.Feedback type="invalid">
+          The email is required.
+        </Form.Control.Feedback>
+      </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              defaultValue="123456"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <Form.Control.Feedback type="invalid">
-              The password is required.
-            </Form.Control.Feedback>
-          </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Password"
+          defaultValue="123456"
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <Form.Control.Feedback type="invalid">
+          The password is required.
+        </Form.Control.Feedback>
+      </Form.Group>
 
-          <div className="d-grid gap-2">
-            <Button variant="primary" size="lg" type="submit">
-              {signInButtonText}
-            </Button>
-          </div>
-          <div className="text-center mt-3">
-            <p>
-              Not a member? <a href="/users/sign_up">Register</a>
-            </p>
-          </div>
-        </Form>
-      </Col>
-    </Row>
+      <div className="d-grid gap-2">
+        <Button variant="primary" size="lg" type="submit">
+          {signInButtonText}
+        </Button>
+      </div>
+      <div className="text-center mt-3">
+        <p>
+          Not a member? <a href="/users/sign_up">Register</a>
+        </p>
+      </div>
+    </Form>
   );
 }
 
