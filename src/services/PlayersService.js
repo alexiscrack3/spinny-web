@@ -2,7 +2,7 @@ import axios from 'axios';
 import Logger from 'js-logger';
 
 const PlayersService = {
-  me: async () => {
+  getProfile: async () => {
     try {
       const config = {
         headers: {

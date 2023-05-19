@@ -11,12 +11,14 @@ function Header() {
   const [playerId, setPlayerId] = useState();
   const [email, setEmail] = useState();
 
+  const getLoggedInUser = async () => {
+    const user = await PlayersService.getProfile();
+    setPlayerId(user.id);
+    setEmail(user.email);
+  };
+
   useEffect(() => {
-    (async () => {
-      const user = await PlayersService.me();
-      setPlayerId(user.id);
-      setEmail(user.email);
-    })();
+    getLoggedInUser();
   }, []);
 
   const tokenManager = useAccessToken();
@@ -56,14 +58,24 @@ function Header() {
             </Nav>
           ) : (
             <Nav>
+              <Nav.Link className="d-block d-lg-none" href="/users/sign_in">
+                Sign in
+              </Nav.Link>
+              <Nav.Link className="d-block d-lg-none" href="/users/sign_up">
+                Sign up
+              </Nav.Link>
               <Button
                 variant="outline-primary"
-                className="me-2"
+                className="d-none d-lg-block me-2"
                 href="/users/sign_in"
               >
                 Sign in
               </Button>
-              <Button variant="primary" href="/users/sign_up">
+              <Button
+                className="d-none d-lg-block"
+                variant="primary"
+                href="/users/sign_up"
+              >
                 Sign up
               </Button>
             </Nav>
