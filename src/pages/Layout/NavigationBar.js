@@ -2,12 +2,12 @@ import { Container, Nav, Navbar, NavDropdown, Button } from 'react-bootstrap';
 
 import React, { useState, useEffect } from 'react';
 
-import './Header.css';
+import './NavigationBar.css';
 
 import { PlayersService } from '../../services';
 import useAccessToken from '../../hooks/Auth';
 
-function Header() {
+function NavigationBar() {
   const [playerId, setPlayerId] = useState();
   const [email, setEmail] = useState();
 
@@ -28,14 +28,14 @@ function Header() {
   };
 
   return (
-    <Navbar className="Header" bg="light" expand="lg">
+    <Navbar className="navbar" bg="light" expand="lg">
       <Container>
         <Navbar.Brand href="/home">Spinny</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/about">About</Nav.Link>
-            {tokenManager.get() && (
+            {tokenManager.accessToken && (
               <NavDropdown title="Admin" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/admin/players">
                   Players
@@ -43,7 +43,7 @@ function Header() {
               </NavDropdown>
             )}
           </Nav>
-          {tokenManager.get() ? (
+          {tokenManager.accessToken ? (
             <Nav>
               <NavDropdown title={email} id="basic-nav-dropdown">
                 <NavDropdown.Item href={`/players/${playerId}`}>
@@ -86,4 +86,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default NavigationBar;

@@ -7,8 +7,9 @@ import './App.css';
 function App() {
   return (
     <BrowserRouter>
-      <Layout />
-      <Routes />
+      <Layout>
+        <Routes />
+      </Layout>
     </BrowserRouter>
   );
 }

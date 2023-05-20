@@ -1,11 +1,13 @@
 import { useState } from 'react';
 
 function useAccessToken() {
-  const [accessToken, setAccessToken] = useState(
-    localStorage.getItem('access_token')
-  );
+  const [accessToken, setAccessToken] = useState(null);
 
-  const get = () => accessToken;
+  const get = () => {
+    const value = localStorage.getItem('access_token');
+    setAccessToken(value);
+    return value;
+  };
 
   const set = (token) => {
     localStorage.setItem('access_token', token);
@@ -14,10 +16,11 @@ function useAccessToken() {
 
   const clear = () => {
     localStorage.removeItem('access_token');
-    setAccessToken(undefined);
+    setAccessToken(null);
   };
 
   return {
+    accessToken,
     get,
     set,
     clear,
