@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 
 import { LoginService } from '../../services';
-import useAccessToken from '../../hooks/Auth';
+import useTokenManager from '../../hooks/UseTokenManager';
 import { AuthContext } from '../../context/AuthProvider';
 
 import './SignIn.css';
@@ -14,7 +14,7 @@ function SignIn() {
   const [validated, setValidated] = useState(false);
   const [signInButtonText, setSignInButtonText] = useState('Sign in');
   const navigateToPlayers = useNavigate();
-  const tokenManager = useAccessToken();
+  const tokenManager = useTokenManager();
   const { setLoggedIn } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {

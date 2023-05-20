@@ -4,7 +4,7 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import { AuthContext } from '../../context/AuthProvider';
 import { PlayersService } from '../../services';
-import useAccessToken from '../../hooks/Auth';
+import useTokenManager from '../../hooks/UseTokenManager';
 
 import './NavigationBar.css';
 
@@ -13,7 +13,7 @@ function NavigationBar() {
   const [email, setEmail] = useState();
 
   const { isLoggedIn, setLoggedIn } = useContext(AuthContext);
-  const tokenManager = useAccessToken();
+  const tokenManager = useTokenManager();
 
   const getLoggedInUser = async () => {
     const user = await PlayersService.getProfile();
