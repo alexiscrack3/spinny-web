@@ -1,13 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Container, Row, Col, Button, Stack, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import Logger from 'js-logger';
 import { BsPlusCircleFill } from 'react-icons/bs';
-import { PlayersContext } from '../../../hooks/Players/PlayersProvider';
+import { PlayersService } from '../../../services';
+import { PlayersContext } from '../../../context/PlayersProvider';
 import './PlayerList.css';
 
 function PlayerList() {
-  const players = useContext(PlayersContext);
+  const { players, setPlayers } = useContext(PlayersContext);
   const navigateToPlayer = useNavigate();
+
+  const getPlayers = async () => {
+    try {
+      const result = await PlayersService.getPlayers();
+      setPlayers(result);
+    } catch (error) {
+      Logger.error(error);
+      setPlayers([]);
+    }
+  };
+
+  useEffect(() => {
+    getPlayers();
+  }, []);
 
   return (
     <Container>
@@ -37,7 +53,7 @@ function PlayerList() {
             </tr>
           </thead>
           <tbody>
-            {(players ?? []).map((player) => (
+            {players.map((player) => (
               <tr key={player.id}>
                 <td>{player.id}</td>
                 <td>{player.email}</td>

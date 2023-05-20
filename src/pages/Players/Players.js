@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PlayersProvider } from '../../hooks/Players/PlayersProvider';
+import { PlayersProvider } from '../../context/PlayersProvider';
 import PlayerList from '../../components/players/PlayerList';
 import PlayerCounter from '../../components/players/PlayerCounter';
 
