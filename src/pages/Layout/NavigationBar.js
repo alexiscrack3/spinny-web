@@ -1,15 +1,19 @@
 import { Container, Nav, Navbar, NavDropdown, Button } from 'react-bootstrap';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
-import './NavigationBar.css';
-
+import { AuthContext } from '../../context/AuthProvider';
 import { PlayersService } from '../../services';
 import useAccessToken from '../../hooks/Auth';
+
+import './NavigationBar.css';
 
 function NavigationBar() {
   const [playerId, setPlayerId] = useState();
   const [email, setEmail] = useState();
+
+  const { isLoggedIn, setLoggedIn } = useContext(AuthContext);
+  const tokenManager = useAccessToken();
 
   const getLoggedInUser = async () => {
     const user = await PlayersService.getProfile();
@@ -17,15 +21,14 @@ function NavigationBar() {
     setEmail(user.email);
   };
 
-  useEffect(() => {
-    getLoggedInUser();
-  }, []);
-
-  const tokenManager = useAccessToken();
-
   const signOut = () => {
     tokenManager.clear();
+    setLoggedIn(false);
   };
+
+  useEffect(() => {
+    getLoggedInUser();
+  }, [isLoggedIn]);
 
   return (
     <Navbar className="navbar" bg="light" expand="lg">
@@ -35,7 +38,7 @@ function NavigationBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/about">About</Nav.Link>
-            {tokenManager.accessToken && (
+            {isLoggedIn && (
               <NavDropdown title="Admin" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/admin/players">
                   Players
@@ -43,7 +46,7 @@ function NavigationBar() {
               </NavDropdown>
             )}
           </Nav>
-          {tokenManager.accessToken ? (
+          {isLoggedIn ? (
             <Nav>
               <NavDropdown title={email} id="basic-nav-dropdown">
                 <NavDropdown.Item href={`/players/${playerId}`}>

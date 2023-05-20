@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 
 import { LoginService } from '../../services';
 import useAccessToken from '../../hooks/Auth';
+import { AuthContext } from '../../context/AuthProvider';
 
 import './SignIn.css';
 
@@ -14,6 +15,7 @@ function SignIn() {
   const [signInButtonText, setSignInButtonText] = useState('Sign in');
   const navigateToPlayers = useNavigate();
   const tokenManager = useAccessToken();
+  const { setLoggedIn } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     const form = e.currentTarget;
@@ -25,8 +27,10 @@ function SignIn() {
       try {
         const accessToken = await LoginService.signIn(email, password);
         tokenManager.set(accessToken);
+        setLoggedIn(true);
         navigateToPlayers('/admin/players');
       } catch (error) {
+        setLoggedIn(false);
         setSignInButtonText('Sign in');
       }
     }
