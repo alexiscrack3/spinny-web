@@ -1,7 +1,6 @@
-import { Container, Nav, Navbar, NavDropdown, Button } from 'react-bootstrap';
-
 import React, { useState, useEffect, useContext } from 'react';
-
+import { useNavigate } from 'react-router-dom';
+import { Container, Nav, Navbar, NavDropdown, Button } from 'react-bootstrap';
 import { AuthContext } from '../../context/AuthProvider';
 import { PlayersService } from '../../services';
 import useTokenManager from '../../hooks/UseTokenManager';
@@ -11,6 +10,7 @@ import './NavigationBar.css';
 function NavigationBar() {
   const [playerId, setPlayerId] = useState();
   const [email, setEmail] = useState();
+  const navigate = useNavigate();
 
   const { isLoggedIn, setLoggedIn } = useContext(AuthContext);
   const tokenManager = useTokenManager();
@@ -24,6 +24,7 @@ function NavigationBar() {
   const signOut = () => {
     tokenManager.clear();
     setLoggedIn(false);
+    navigate('/users/sign_in');
   };
 
   useEffect(() => {
