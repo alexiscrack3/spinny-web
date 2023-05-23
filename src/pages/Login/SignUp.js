@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Alert, Button, Form, Row } from 'react-bootstrap';
+import validator from 'validator';
 
 import { LoginService } from '../../services';
 import useTokenManager from '../../hooks/UseTokenManager';
@@ -36,17 +37,12 @@ function SignUp() {
   const tokenManager = useTokenManager();
   const { setLoggedIn } = useContext(AuthContext);
 
-  const isEmailValid = (emailAddress) => {
-    const emailRegex = /^\w+(\[\+\.-\]?\w)*@\w+(\[\.-\]?\w+)*\.[a-z]+$/i;
-    return emailRegex.test(emailAddress);
-  };
-
   const getFormParams = () => {
     const params = new FormParams();
     if (!email) {
       params.email = 'The email is required.';
     }
-    if (email && !isEmailValid(email)) {
+    if (email && !validator.isEmail(email)) {
       params.email = 'The email is not valid.';
     }
     if (!firstName) {
