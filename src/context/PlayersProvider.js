@@ -1,6 +1,9 @@
 import React, { useState, createContext, useMemo } from 'react';
 
-const PlayersContext = createContext([]);
+const PlayersContext = createContext({
+  players: undefined,
+  setPlayers: undefined,
+});
 
 function PlayersProvider({ children }) {
   const [players, setPlayers] = useState([]);
