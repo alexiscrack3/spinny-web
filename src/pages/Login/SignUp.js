@@ -8,26 +8,73 @@ import { AuthContext } from '../../context/AuthProvider';
 
 import './SignUp.css';
 
+class FormParams {
+  constructor(
+    firstName = null,
+    lastName = null,
+    email = null,
+    password = null,
+    message = null
+  ) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.password = password;
+    this.message = message;
+  }
+}
+
 function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [validated, setValidated] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const [formParams, setFormParams] = useState(new FormParams());
   const [SignUpButtonText, setSignUpButtonText] = useState('Sign up');
   const navigateToPlayers = useNavigate();
   const tokenManager = useTokenManager();
   const { setLoggedIn } = useContext(AuthContext);
 
+  const isEmailValid = (emailAddress) => {
+    const emailRegex = /^\w+(\[\+\.-\]?\w)*@\w+(\[\.-\]?\w+)*\.[a-z]+$/i;
+    return emailRegex.test(emailAddress);
+  };
+
+  const getFormParams = () => {
+    const input = new FormParams();
+    if (!email) {
+      input.email = 'The email is required.';
+    }
+    if (email && !isEmailValid(email)) {
+      input.email = 'The email is not valid.';
+    }
+    if (!firstName) {
+      input.firstName = 'The first name is required.';
+    }
+    if (!lastName) {
+      input.lastName = 'The last name is required.';
+    }
+    if (!password) {
+      input.password = 'The password is required.';
+    }
+    if (password && password.length < 6) {
+      input.password = 'The password must be at least 6 characters.';
+    }
+    return input;
+  };
+
   const handleSubmit = async (e) => {
     const form = e.currentTarget;
     e.preventDefault();
     e.stopPropagation();
+    setValidated(true);
 
     if (form.checkValidity()) {
       try {
+        setFormParams(new FormParams());
         setSignUpButtonText('Signing up...');
+
         const accessToken = await LoginService.signUp(
           firstName,
           lastName,
@@ -35,25 +82,33 @@ function SignUp() {
           password
         );
         tokenManager.set(accessToken);
-        setHasError(false);
         setLoggedIn(true);
         navigateToPlayers('/admin/players');
       } catch (error) {
-        setHasError(true);
+        const params = new FormParams();
+        params.message = error.message;
+
+        setFormParams(params);
         setLoggedIn(false);
         setSignUpButtonText('Sign up');
       }
+    } else {
+      const params = getFormParams();
+      if (Object.keys(params).length) {
+        setFormParams(params);
+      }
     }
-    setValidated(true);
   };
 
   const showAlert = () => (
     <Alert variant="danger" transition dismissible>
-      This is an alert!
+      {formParams.message}
     </Alert>
   );
+
   return (
     <>
+      <Row>{formParams.message && showAlert()}</Row>
       <Row>
         <Form
           className="form-sign-up"
@@ -70,7 +125,7 @@ function SignUp() {
               required
             />
             <Form.Control.Feedback type="invalid">
-              The email is required.
+              {formParams.email}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -83,7 +138,7 @@ function SignUp() {
               required
             />
             <Form.Control.Feedback type="invalid">
-              The first name is required.
+              {formParams.firstName}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -96,7 +151,7 @@ function SignUp() {
               required
             />
             <Form.Control.Feedback type="invalid">
-              The last name is required.
+              {formParams.lastName}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -105,11 +160,12 @@ function SignUp() {
             <Form.Control
               type="password"
               placeholder="Password"
+              minLength={6}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
             <Form.Control.Feedback type="invalid">
-              The password is required.
+              {formParams.password}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -125,7 +181,6 @@ function SignUp() {
           </div>
         </Form>
       </Row>
-      <Row>{hasError && showAlert()}</Row>
     </>
   );
 }

@@ -33,7 +33,9 @@ const LoginService = {
       return accessToken;
     } catch (error) {
       Logger.error(error);
-      throw error;
+
+      const { message } = error.response.data.errors.pop();
+      throw new Error(message);
     }
   },
 };

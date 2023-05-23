@@ -1,7 +1,10 @@
 import React, { useState, createContext, useMemo, useEffect } from 'react';
 import useTokenManager from '../hooks/UseTokenManager';
 
-const AuthContext = createContext(false);
+const AuthContext = createContext({
+  isLoggedIn: undefined,
+  setLoggedIn: undefined,
+});
 
 function AuthProvider({ children }) {
   const [isLoggedIn, setLoggedIn] = useState(false);
