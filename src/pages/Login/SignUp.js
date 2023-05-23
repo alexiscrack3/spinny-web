@@ -42,26 +42,26 @@ function SignUp() {
   };
 
   const getFormParams = () => {
-    const input = new FormParams();
+    const params = new FormParams();
     if (!email) {
-      input.email = 'The email is required.';
+      params.email = 'The email is required.';
     }
     if (email && !isEmailValid(email)) {
-      input.email = 'The email is not valid.';
+      params.email = 'The email is not valid.';
     }
     if (!firstName) {
-      input.firstName = 'The first name is required.';
+      params.firstName = 'The first name is required.';
     }
     if (!lastName) {
-      input.lastName = 'The last name is required.';
+      params.lastName = 'The last name is required.';
     }
     if (!password) {
-      input.password = 'The password is required.';
+      params.password = 'The password is required.';
     }
     if (password && password.length < 6) {
-      input.password = 'The password must be at least 6 characters.';
+      params.password = 'The password must be at least 6 characters.';
     }
-    return input;
+    return params;
   };
 
   const handleSubmit = async (e) => {
