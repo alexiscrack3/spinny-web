@@ -15,7 +15,9 @@ const LoginService = {
       return accessToken;
     } catch (error) {
       Logger.error(error);
-      throw error;
+
+      const { data } = error.response;
+      throw new Error(data);
     }
   },
   signUp: async (firstName, lastName, email, password) => {

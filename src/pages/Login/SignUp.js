@@ -9,7 +9,7 @@ import { AuthContext } from '../../context/AuthProvider';
 
 import './SignUp.css';
 
-class FormParams {
+class ValidationSchema {
   constructor(
     firstName = null,
     lastName = null,
@@ -31,44 +31,45 @@ function SignUp() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [validated, setValidated] = useState(false);
-  const [formParams, setFormParams] = useState(new FormParams());
-  const [SignUpButtonText, setSignUpButtonText] = useState('Sign up');
+  const [validationSchema, setValidationSchema] = useState(
+    new ValidationSchema()
+  );
+  const [signUpButtonText, setSignUpButtonText] = useState('Sign up');
   const navigateToPlayers = useNavigate();
   const tokenManager = useTokenManager();
   const { setLoggedIn } = useContext(AuthContext);
 
-  const getFormParams = () => {
-    const params = new FormParams();
+  const getValidationSchema = () => {
+    const schema = new ValidationSchema();
     if (!email) {
-      params.email = 'The email is required.';
+      schema.email = 'The email is required.';
     }
     if (email && !validator.isEmail(email)) {
-      params.email = 'The email is not valid.';
+      schema.email = 'The email is not valid.';
     }
     if (!firstName) {
-      params.firstName = 'The first name is required.';
+      schema.firstName = 'The first name is required.';
     }
     if (!lastName) {
-      params.lastName = 'The last name is required.';
+      schema.lastName = 'The last name is required.';
     }
     if (!password) {
-      params.password = 'The password is required.';
+      schema.password = 'The password is required.';
     }
     if (password && password.length < 6) {
-      params.password = 'The password must be at least 6 characters.';
+      schema.password = 'The password must be at least 6 characters.';
     }
-    return params;
+    return schema;
   };
 
   const handleSubmit = async (e) => {
     const form = e.currentTarget;
     e.preventDefault();
     e.stopPropagation();
-    setValidated(true);
 
     if (form.checkValidity()) {
       try {
-        setFormParams(new FormParams());
+        setValidationSchema(new ValidationSchema());
         setSignUpButtonText('Signing up...');
 
         const accessToken = await LoginService.signUp(
@@ -81,30 +82,31 @@ function SignUp() {
         setLoggedIn(true);
         navigateToPlayers('/admin/players');
       } catch (error) {
-        const params = new FormParams();
-        params.message = error.message;
+        const schema = new ValidationSchema();
+        schema.message = error.message;
 
-        setFormParams(params);
+        setValidationSchema(schema);
         setLoggedIn(false);
         setSignUpButtonText('Sign up');
       }
     } else {
-      const params = getFormParams();
-      if (Object.keys(params).length) {
-        setFormParams(params);
+      const schema = getValidationSchema();
+      if (Object.keys(schema).length) {
+        setValidationSchema(schema);
       }
     }
+    setValidated(true);
   };
 
   const showAlert = () => (
     <Alert variant="danger" transition dismissible>
-      {formParams.message}
+      {validationSchema.message}
     </Alert>
   );
 
   return (
     <>
-      <Row>{formParams.message && showAlert()}</Row>
+      <Row>{validationSchema.message && showAlert()}</Row>
       <Row>
         <Form
           className="form-sign-up"
@@ -121,7 +123,7 @@ function SignUp() {
               required
             />
             <Form.Control.Feedback type="invalid">
-              {formParams.email}
+              {validationSchema.email}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -134,7 +136,7 @@ function SignUp() {
               required
             />
             <Form.Control.Feedback type="invalid">
-              {formParams.firstName}
+              {validationSchema.firstName}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -147,7 +149,7 @@ function SignUp() {
               required
             />
             <Form.Control.Feedback type="invalid">
-              {formParams.lastName}
+              {validationSchema.lastName}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -161,13 +163,13 @@ function SignUp() {
               required
             />
             <Form.Control.Feedback type="invalid">
-              {formParams.password}
+              {validationSchema.password}
             </Form.Control.Feedback>
           </Form.Group>
 
           <div className="d-grid gap-2">
             <Button variant="primary" size="lg" type="submit">
-              {SignUpButtonText}
+              {signUpButtonText}
             </Button>
           </div>
           <div className="text-center mt-3">
