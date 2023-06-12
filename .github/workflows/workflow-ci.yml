@@ -11,7 +11,7 @@ on:
 
 env:
   IMAGE_NAME: alexiscrack3/spinny-web:latest
-  REACT_APP_BASE_URL: ${{ variables.REACT_APP_BASE_URL }}
+  REACT_APP_BASE_URL: ${{ env.REACT_APP_BASE_URL }}
 
 jobs:
   lint:
