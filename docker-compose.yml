@@ -1,0 +1,89 @@
+version: "3.8"
+
+services:
+  web:
+    container_name: web
+    restart: always
+    depends_on:
+      - api
+    env_file:
+      - .env
+    ports:
+      - "80:80"
+    networks:
+      - spinny-network
+
+  api:
+    image: alexiscrack3/spinny-api:latest
+    container_name: api
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - api.env
+    environment:
+      - MYSQL_HOST=db
+    ports:
+      - 3000:3000
+    networks:
+      - spinny-network
+      - data-network
+
+  db:
+    image: mysql:5.7.37
+    platform: linux/x86_64
+    container_name: db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER:-spinny_api}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    networks:
+      - data-network
+    volumes:
+      - data-volume:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      # interval: 1m30s
+      timeout: 30s
+      retries: 5
+      # start_period: 30s
+
+  redis:
+    image: redis:7.0.7
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - spinny-network
+    volumes:
+      - redis-volume:/data
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: redis-commander
+    depends_on:
+      - redis
+    restart: always
+    environment:
+      - REDIS_HOST=redis
+    ports:
+      - "8081:8081"
+    networks:
+      - data-network
+
+networks:
+  spinny-network:
+    driver: bridge
+  data-network:
+    driver: bridge
+
+volumes:
+  data-volume:
+    driver: local
+  redis-volume:
+    driver: local
