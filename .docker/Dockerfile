@@ -13,6 +13,11 @@ RUN npm run build
 
 FROM nginx:1.25.0-alpine
 
+ENV REACT_APP_BASE_URL=$REACT_APP_BASE_URL
+
+RUN echo "Hi==="
+RUN echo $REACT_APP_BASE_URL
+
 COPY ./.nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 ## Remove default nginx index page
