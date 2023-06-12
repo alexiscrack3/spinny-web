@@ -11,7 +11,6 @@ on:
 
 env:
   IMAGE_NAME: alexiscrack3/spinny-web:latest
-  REACT_APP_BASE_URL: ${{ vars.REACT_APP_BASE_URL }}
 
 jobs:
   lint:
@@ -44,9 +43,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - run: touch env.production
-      - run: echo REACT_APP_BASE_URL=${{ vars.REACT_APP_BASE_URL }}
-
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
@@ -54,3 +50,5 @@ jobs:
           push: true
           tags: ${{ env.IMAGE_NAME }}
           file: .docker/Dockerfile
+        env:
+          REACT_APP_BASE_URL: ${{ vars.REACT_APP_BASE_URL }}
