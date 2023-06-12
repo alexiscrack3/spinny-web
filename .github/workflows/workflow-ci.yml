@@ -44,6 +44,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
+      - run: touch env.production
+      - run: echo REACT_APP_BASE_URL=${{ vars.REACT_APP_BASE_URL }}
+
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
