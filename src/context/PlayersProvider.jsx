@@ -9,7 +9,7 @@ function PlayersProvider({ children }) {
   const [players, setPlayers] = useState([]);
   const playersMemo = useMemo(() => ({ players, setPlayers }), [players]);
 
-  return (
+  return ( 
     <PlayersContext.Provider value={playersMemo}>
       {children}
     </PlayersContext.Provider>
