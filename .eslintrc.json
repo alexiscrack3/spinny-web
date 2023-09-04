@@ -5,9 +5,10 @@
         "jest": true
     },
     "extends": [
-        "plugin:react/recommended",
         "airbnb",
-        "prettier"
+        "prettier",
+        "plugin:react/recommended",
+        "plugin:prettier/recommended"
     ],
     "overrides": [
     ],
